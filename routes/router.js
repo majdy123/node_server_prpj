@@ -11,6 +11,8 @@ const uploadrecipeController = require("../controllers/upload_recipe_controller"
 const recipeController = require("../controllers/recipe_controller");
 const nutritionController = require("../controllers/nutrition_controller");
 const group_workoutController = require("../controllers/group_workout_controller");
+const market_controller = require("../controllers/market_controller");
+
 
 
 router.post("/api/person/setpass", personContrller.setpass); //Forget Password API set password if Email true //ForgetPass
@@ -61,11 +63,21 @@ router.post("/api/updateNutrition", nutritionController.updateNutrition); // del
 router.post("/api/getNutrition", nutritionController.getNutrition); // delete nutrition
   
 //workout plan coach section
-router.get("/api/getWorkoutCat",group_workoutController.getWorkoutCat);//return workout based on categorie_id
+router.post("/api/getWorkoutCat",group_workoutController.getWorkoutCat);//return workout based on categorie_id
 router.post("/api/addNewWorkout/:folderName",group_workoutController.addNewWorkout)//create a workout this api saves with the photo you must pass in form-data in postman
 router.post("/api/deleteWorkout",group_workoutController.deleteWorkout);//remove a workout based on exercise_id
-router.get("/api/getWorkout",group_workoutController.getWorkoutData);//get workout based on exercise_id 
+router.post("/api/getWorkout",group_workoutController.getWorkoutData);//get workout based on exercise_id 
 router.post("/api/updateWorkout/:folderName",group_workoutController.UpdateWorkout);//Update workout based on exercise_id 
-router.get("/api/countWorkoutInCategorie",group_workoutController.countWorkoutInCategorie);//Count the workout in each categorie
+router.post("/api/countWorkoutInCategorie",group_workoutController.countWorkoutInCategorie);//Count the workout in each categorie
+router.post("/api/updateWorkoutwithoutphoto",group_workoutController.updateWorkoutwithoutphoto);
+
+//store supplement
+router.post("/api/getItemCategorie",market_controller.getItemCategorie);//return items based on categorie id
+router.post("/api/store/addItem/:folderName",market_controller.addNewItem);//add new item to store
+router.post("/api/store/CountItemsCategorie",market_controller.CountItemsCategorie);//count items on each Categorie
+router.post("/api/getStoreItemCategorie",market_controller.GetItemsCategorie);//Get Item Details to view in store 
+router.post("/api/deleteStoreItem",market_controller.deleteStoreItem);//delete item from store
+
+
 
 module.exports = router;

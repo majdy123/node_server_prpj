@@ -15,6 +15,49 @@ class group_workout {
         });
     }
 
+
+    static async updateWorkoutwithoutphoto(
+      exercise_id,
+      excersie_name,
+      Cal,
+      Fav,
+      workout_level,
+      Reps,
+      Round,
+      Time,
+      Tutorial,
+      Video,
+      categorie
+    ){
+      return new Promise((resolve) => {
+        db.query("UPDATE `group_workout` SET `excersie_name`= ?,`Cal`= ?,`Fav`=?,`workout_level`=?,`Reps`=?,`Round`=?,`Time`=?,`Tutorial`=?,`Video`=?,`categorie`=? WHERE `exercise_id`=?",[
+          excersie_name,
+          Cal,
+          Fav,
+          workout_level,
+          Reps,
+          Round,
+          Time,
+          Tutorial,
+          Video,
+          categorie,
+          exercise_id
+      ],
+      (err, res) => {
+          if (!err) {
+            if(res.affectedRows > 0){
+              resolve(true);
+            }else{
+              console.log(res);
+              resolve(false);
+            }
+          } else {
+            console.log(err);
+            resolve(false);
+          }
+        })
+      });
+    }
     static async UpdateWorkout(
         exercise_id,
         excersie_name,

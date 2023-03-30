@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 class  group_workoutController {
-
     static async countWorkoutInCategorie(req, res){
       const categorie_id = req.body.categorie_id;
       var result = await group_workoutModel.getWorkoutCat(categorie_id);
@@ -33,7 +32,44 @@ class  group_workoutController {
         );
       }
     }
-
+    static async updateWorkoutwithoutphoto(req, res){
+      const exercise_id = req.body.exercise_id;
+      const excersie_name = req.body.excersie_name;
+      const Cal = req.body.Cal;
+      const Fav = req.body.Fav;
+      const workout_level = req.body.workout_level;
+      const Reps = req.body.Reps;
+      const Round = req.body.Round;
+      const Time = req.body.Time;
+      const Tutorial = req.body.Tutorial;
+      const Video = req.body.Video;
+      const categorie = req.body.categorie;
+          var result = await group_workoutModel.updateWorkoutwithoutphoto(
+          exercise_id,
+          excersie_name,
+          Cal,
+          Fav,
+          workout_level,
+          Reps,
+          Round,
+          Time,
+          Tutorial,
+          Video,
+          categorie
+        );
+        if (result == true) {
+          res.send({
+            message: "update successfully",
+            status: 200,
+          });
+        } else {
+          res.send({
+            message: "Update failed",
+            status: 400,
+          });
+        }
+        
+    }
     static async getWorkoutCat(req, res){
         const categorie_id = req.body.categorie_id;
         var result = await group_workoutModel.getWorkoutCat(categorie_id);
